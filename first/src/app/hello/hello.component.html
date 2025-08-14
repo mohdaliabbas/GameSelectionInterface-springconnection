@@ -1,0 +1,49 @@
+<div class="hello-container">
+  <div class="hello-header">
+    <h3>🌐 Spring Boot Connection</h3>
+    <div class="connection-status">
+      <span class="status-icon">{{ getStatusIcon() }}</span>
+      <span class="status-text">{{ getStatusText() }}</span>
+    </div>
+  </div>
+
+  <div class="hello-content">
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p>🔄 Connecting to Spring Boot...</p>
+    </div>
+
+    <div *ngIf="!isLoading" class="message-container">
+      <div class="message-display">
+        <h4>Message from Backend:</h4>
+        <div class="message-text">{{ helloMessage }}</div>
+      </div>
+      
+      <div class="message-actions">
+        <button 
+          (click)="refreshConnection()" 
+          class="refresh-btn"
+          [disabled]="isLoading">
+          🔄 Refresh Connection
+        </button>
+        
+        <div class="last-updated">
+          <small>Last updated: {{ getLastUpdatedText() }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connection-info">
+    <div class="info-item">
+      <span class="info-label">Endpoint:</span>
+      <span class="info-value">http://localhost:8080/api/hello</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Status:</span>
+      <span class="info-value" [class]="'status-' + connectionStatus">
+        {{ getStatusText() }}
+      </span>
+    </div>
+  </div>
+</div>

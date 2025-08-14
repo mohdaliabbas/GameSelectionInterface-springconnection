@@ -1,0 +1,160 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2>🚀 Hello Components Dashboard</h2>
+    <div class="dashboard-controls">
+      <button 
+        (click)="toggleAutoRefresh()" 
+        [class]="'control-btn ' + (autoRefreshEnabled ? 'active' : '')"
+        class="control-btn">
+        {{ autoRefreshEnabled ? '⏹️ Stop Auto-refresh' : '🔄 Start Auto-refresh' }}
+      </button>
+      <button (click)="loadAllData()" class="control-btn refresh-all-btn">
+        🔄 Refresh All
+      </button>
+      <button (click)="resetStatistics()" class="control-btn reset-btn">
+        📊 Reset Stats
+      </button>
+    </div>
+  </div>
+
+  <!-- Health Status Section -->
+  <div class="health-section">
+    <h3>🏥 System Health</h3>
+    <div class="health-card" [class]="getHealthStatusClass()">
+      <div class="health-icon">{{ getHealthStatusIcon() }}</div>
+      <div class="health-info">
+        <div class="health-status">{{ healthStatus | titlecase }}</div>
+        <div class="health-details">{{ healthDetails }}</div>
+      </div>
+      <button 
+        (click)="performHealthCheck()" 
+        [disabled]="isLoadingHealth"
+        class="health-check-btn">
+        {{ isLoadingHealth ? '🔄 Checking...' : '🔍 Check Health' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Hello Messages Section -->
+  <div class="messages-section">
+    <h3>💬 Hello Messages</h3>
+    <div class="messages-grid">
+      <!-- Basic Hello -->
+      <div class="message-card basic">
+        <div class="card-header">
+          <h4>📡 Basic Hello Service</h4>
+          <div class="card-status" [class]="'status-' + (basicConnectionState?.isConnected ? 'connected' : 'disconnected')">
+            {{ basicConnectionState?.isConnected ? '🟢 Connected' : '🔴 Disconnected' }}
+          </div>
+        </div>
+        <div class="card-content">
+          <div *ngIf="isLoadingBasic" class="loading-indicator">
+            <div class="mini-spinner"></div>
+            <span>Loading...</span>
+          </div>
+          <div *ngIf="!isLoadingBasic" class="message-text">
+            {{ basicHelloMessage }}
+          </div>
+        </div>
+        <div class="card-actions">
+          <button (click)="loadBasicHello()" [disabled]="isLoadingBasic" class="action-btn">
+            🔄 Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Enhanced Hello -->
+      <div class="message-card enhanced">
+        <div class="card-header">
+          <h4>⚡ Enhanced Hello Service</h4>
+          <div class="card-status" [class]="'status-' + (enhancedConnectionState?.isConnected ? 'connected' : 'disconnected')">
+            {{ enhancedConnectionState?.isConnected ? '🟢 Connected' : '🔴 Disconnected' }}
+          </div>
+        </div>
+        <div class="card-content">
+          <div *ngIf="isLoadingEnhanced" class="loading-indicator">
+            <div class="mini-spinner"></div>
+            <span>Loading...</span>
+          </div>
+          <div *ngIf="!isLoadingEnhanced" class="message-text">
+            {{ enhancedHelloMessage }}
+          </div>
+        </div>
+        <div class="card-actions">
+          <button (click)="loadEnhancedHello()" [disabled]="isLoadingEnhanced" class="action-btn">
+            🔄 Refresh
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Section -->
+  <div class="stats-section">
+    <h3>📊 Request Statistics</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-value">{{ totalRequests }}</div>
+        <div class="stat-label">Total Requests</div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value">{{ successfulRequests }}</div>
+        <div class="stat-label">Successful</div>
+      </div>
+      <div class="stat-card error">
+        <div class="stat-icon">❌</div>
+        <div class="stat-value">{{ failedRequests }}</div>
+        <div class="stat-label">Failed</div>
+      </div>
+      <div class="stat-card rate">
+        <div class="stat-icon">📊</div>
+        <div class="stat-value">{{ getSuccessRate() }}%</div>
+        <div class="stat-label">Success Rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection Details Section -->
+  <div class="connection-details-section">
+    <h3>🔗 Connection Details</h3>
+    <div class="connection-grid">
+      <div class="connection-card">
+        <h4>Basic Service</h4>
+        <div class="connection-info">
+          <div class="info-row">
+            <span class="info-label">Status:</span>
+            <span class="info-value">{{ basicConnectionState?.isConnected ? 'Connected' : 'Disconnected' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Last Message:</span>
+            <span class="info-value">{{ basicConnectionState?.lastMessage || 'None' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Last Attempt:</span>
+            <span class="info-value">{{ getLastAttemptText(basicConnectionState) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="connection-card">
+        <h4>Enhanced Service</h4>
+        <div class="connection-info">
+          <div class="info-row">
+            <span class="info-label">Status:</span>
+            <span class="info-value">{{ enhancedConnectionState?.isConnected ? 'Connected' : 'Disconnected' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Retry Count:</span>
+            <span class="info-value">{{ enhancedConnectionState?.retryCount || 0 }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Last Error:</span>
+            <span class="info-value">{{ enhancedConnectionState?.lastError || 'None' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

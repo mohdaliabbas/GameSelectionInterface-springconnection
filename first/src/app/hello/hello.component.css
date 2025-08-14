@@ -1,0 +1,236 @@
+.hello-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hello-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.hello-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.status-icon {
+  font-size: 1.2rem;
+  animation: pulse 2s infinite;
+}
+
+.status-text {
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.hello-content {
+  margin-bottom: 24px;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+.loading-container p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.message-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.message-display h4 {
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.message-text {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  border-left: 4px solid #4ade80;
+  margin-bottom: 20px;
+  word-break: break-word;
+}
+
+.message-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.refresh-btn {
+  background: linear-gradient(45deg, #4ade80, #22c55e);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+}
+
+.refresh-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
+}
+
+.refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.last-updated {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.connection-info {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-weight: 500;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.info-value {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  word-break: break-all;
+}
+
+.status-connected {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.status-disconnected {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.status-error {
+  color: #f87171;
+  font-weight: 600;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hello-container {
+    padding: 16px;
+    margin: 16px 0;
+  }
+  
+  .hello-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .message-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .refresh-btn {
+    width: 100%;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hello-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .message-text {
+    font-size: 1.1rem;
+    padding: 12px;
+  }
+  
+  .refresh-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

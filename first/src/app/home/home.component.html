@@ -1,0 +1,46 @@
+<div class="home-container">
+  <h1>{{ title }}</h1>
+  
+  <!-- Game Section -->
+  <div class="game-section">
+    <div *ngIf="!gameStarted" class="game-menu">
+      <h2>Choose a Game</h2>
+      <div class="game-options">
+        <button (click)="startGame('Memory')" class="game-btn memory">
+          🧠 Memory Game
+        </button>
+        <button (click)="startGame('Puzzle')" class="game-btn puzzle">
+          🧩 Puzzle Game
+        </button>
+        <button (click)="startGame('Quiz')" class="game-btn quiz">
+          ❓ Quiz Game
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="gameStarted" class="game-area">
+      <div class="game-header">
+        <h2>{{ gameType }} Game</h2>
+        <div class="score-display">
+          <span class="score-label">Score:</span>
+          <span class="score-value">{{ score }}</span>
+        </div>
+      </div>
+      
+      <div class="game-content">
+        <p>🎮 {{ gameType }} game is running...</p>
+        <div class="game-actions">
+          <button (click)="updateScore(10)" class="action-btn score-btn">
+            +10 Points
+          </button>
+          <button (click)="updateScore(25)" class="action-btn score-btn">
+            +25 Points
+          </button>
+          <button (click)="endGame()" class="action-btn end-btn">
+            End Game
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
